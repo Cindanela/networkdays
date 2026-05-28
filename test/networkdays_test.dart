@@ -37,7 +37,9 @@ void main() {
 
     test('end before start returns negative count', () {
       // Fri 2024-01-12 → Mon 2024-01-08: reversed → -5
-      check(networkDays(DateTime(2024, 1, 12), DateTime(2024, 1, 8))).equals(-5);
+      check(
+        networkDays(DateTime(2024, 1, 12), DateTime(2024, 1, 8)),
+      ).equals(-5);
     });
 
     test('DST boundary (spring-forward, US eastern)', () {
@@ -71,6 +73,70 @@ void main() {
           holidays: [DateTime(2024, 1, 10, 9, 30)],
         ),
       ).equals(4);
+    });
+  });
+
+  group('networkDaysIntl — weekendDays validation', () {
+    test('throws ArgumentError for weekday value 0', () {
+      check(
+        () => networkDaysIntl(
+          DateTime(2024, 1, 8),
+          DateTime(2024, 1, 12),
+          weekendDays: {0, 6},
+        ),
+      ).throws<ArgumentError>();
+    });
+
+    test('throws ArgumentError for weekday value 8', () {
+      check(
+        () => networkDaysIntl(
+          DateTime(2024, 1, 8),
+          DateTime(2024, 1, 12),
+          weekendDays: {8},
+        ),
+      ).throws<ArgumentError>();
+    });
+
+    test('throws ArgumentError for negative weekday value', () {
+      check(
+        () => networkDaysIntl(
+          DateTime(2024, 1, 8),
+          DateTime(2024, 1, 12),
+          weekendDays: {-1},
+        ),
+      ).throws<ArgumentError>();
+    });
+
+    test('empty weekendDays set is valid', () {
+      check(
+        () => networkDaysIntl(
+          DateTime(2024, 1, 8),
+          DateTime(2024, 1, 14),
+          weekendDays: {},
+        ),
+      ).returnsNormally();
+    });
+  });
+
+  group('getWorkdays — weekendDays validation', () {
+    test('throws ArgumentError for out-of-range weekday', () {
+      check(
+        () => getWorkdays(
+          DateTime(2024, 1, 8),
+          DateTime(2024, 1, 12),
+          weekendDays: {0},
+        ),
+      ).throws<ArgumentError>();
+    });
+
+    test('all seven valid weekday values accepted', () {
+      check(
+        () => getWorkdays(
+          DateTime(2024, 1, 8),
+          DateTime(2024, 1, 14),
+          weekendDays: {1, 2, 3, 4, 5, 6, 7},
+        ),
+      ).returnsNormally();
     });
   });
 

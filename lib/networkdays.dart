@@ -13,18 +13,34 @@ DateTime _dateOnly(DateTime dt) => DateTime(dt.year, dt.month, dt.day);
 Set<DateTime> _normalizeHolidays(List<DateTime> holidays) =>
     holidays.map(_dateOnly).toSet();
 
+/// Throws [ArgumentError] if any value in [weekendDays] is outside the
+/// ISO weekday range 1 (Monday) – 7 (Sunday).
+void _validateWeekendDays(Set<int> weekendDays) {
+  final invalid = weekendDays.where((d) => d < 1 || d > 7).toList();
+  if (invalid.isNotEmpty) {
+    throw ArgumentError.value(
+      invalid,
+      'weekendDays',
+      'ISO weekday numbers must be between 1 (Monday) and 7 (Sunday)',
+    );
+  }
+}
+
 /// Returns the number of working days between [start] and [end] (inclusive),
 /// excluding [weekendDays] (ISO weekday numbers: Mon=1 … Sun=7) and [holidays].
 ///
 /// Mirrors Excel NETWORKDAYS.INTL: returns a negative count when [end] is
 /// before [start]. When [start] and [end] are the same date, returns 1 if that
 /// day is a working day, or 0 if it falls on a weekend or holiday.
+///
+/// Throws [ArgumentError] if any value in [weekendDays] is outside 1–7.
 int networkDaysIntl(
   DateTime start,
   DateTime end, {
   Set<int> weekendDays = const {6, 7},
   List<DateTime> holidays = const [],
 }) {
+  _validateWeekendDays(weekendDays);
   final s = _dateOnly(start);
   final e = _dateOnly(end);
   final holidaySet = _normalizeHolidays(holidays);
@@ -64,12 +80,15 @@ int networkDays(
 ///
 /// Always iterates from the earlier date to the later date; the list is
 /// returned in chronological order even when [end] is before [start].
+///
+/// Throws [ArgumentError] if any value in [weekendDays] is outside 1–7.
 List<DateTime> getWorkdays(
   DateTime start,
   DateTime end, {
   Set<int> weekendDays = const {6, 7},
   List<DateTime> holidays = const [],
 }) {
+  _validateWeekendDays(weekendDays);
   final s = _dateOnly(start);
   final e = _dateOnly(end);
   final holidaySet = _normalizeHolidays(holidays);
