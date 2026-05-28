@@ -1,0 +1,26 @@
+# Dart/Pub
+# Libraries should not commit pubspec.lock (https://dart.dev/guides/libraries/private-files#pubspeclock)
+pubspec.lock
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+build/
+coverage/
+doc/api/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Logs / temp
+*.log
+*.swp
