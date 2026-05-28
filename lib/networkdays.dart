@@ -1,3 +1,10 @@
+/// Count and list working days between two dates.
+///
+/// Provides [networkDays] (Excel NETWORKDAYS), [networkDaysIntl] (Excel
+/// NETWORKDAYS.INTL with a configurable weekend), and [getWorkdays] which
+/// returns a chronologically ordered list of working [DateTime] values.
+library;
+
 /// Strips the time-of-day component, returning a date-only [DateTime].
 DateTime _dateOnly(DateTime dt) => DateTime(dt.year, dt.month, dt.day);
 

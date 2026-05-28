@@ -1,3 +1,12 @@
+## 0.0.2
+
+* Added `example/networkdays_example.dart` with runnable usage examples.
+* Added library-level dartdoc comment; all public API now fully documented.
+* Migrated tests from `flutter_test`/`expect()` to `package:test` +
+  `package:checks` assertions.
+* Added `package:coverage` dev dependency; test suite achieves 100% line
+  coverage.
+
 ## 0.0.1
 
 * Initial release.
