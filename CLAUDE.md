@@ -2,12 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Pure Dart library package (no native plugins). Flutter is a dev dependency only (for lints).
+Pure Dart library package: no Flutter dependency, so Dart-only packages can use it.
 
 ## Commands
 
 ```bash
-flutter pub get                                    # install dependencies
+dart pub get                                       # install dependencies
 dart test                                          # run all tests
 dart test test/networkdays_test.dart               # run a single test file
 dart analyze                                       # static analysis / linting
@@ -19,9 +19,9 @@ dart run coverage:test_with_coverage               # run tests with coverage (ou
 - **`lib/networkdays.dart`** — single library entry point; all public API is exported from here
 - **`example/networkdays_example.dart`** — runnable usage example (required by pub.dev)
 - **`test/`** — unit tests using `package:test` and `package:checks`
-- **`analysis_options.yaml`** — extends `package:flutter_lints/flutter.yaml`; no custom lint rules
+- **`analysis_options.yaml`** — extends `package:lints/recommended.yaml`; no custom lint rules
 
-The package targets Dart `^3.12.0` / Flutter `>=1.17.0`.
+The package targets Dart `^3.12.0`.
 
 ## Code style
 

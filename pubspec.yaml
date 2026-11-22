@@ -2,7 +2,7 @@ name: networkdays
 description: >-
   Calculate working days between two dates with Excel NETWORKDAYS semantics.
   Supports custom weekends, holidays, and date-list output.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/Cindanela/networkdays
 repository: https://github.com/Cindanela/networkdays
 license: MIT
@@ -14,18 +14,9 @@ topics:
 
 environment:
   sdk: ^3.12.0
-  flutter: ">=1.17.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^6.0.0
   checks: ^0.3.1
   test: ^1.31.0
   coverage: ^1.15.0
-
-flutter:
+  lints: ^6.1.0
