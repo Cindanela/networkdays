@@ -1,3 +1,8 @@
+## 0.0.3
+
+* Pure Dart: dropped the unused Flutter SDK dependency, so Dart-only
+  packages can depend on it. Lints now from `package:lints`.
+
 ## 0.0.2
 
 * Added `example/networkdays_example.dart` with runnable usage examples.
